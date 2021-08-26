@@ -1,0 +1,20 @@
+{
+  "name": "pretty-calculator",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^1.7.6",
+    "electron-packager": "9.0.1"
+  },
+  "version": "1.0.0",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "zeromq": "4.6.0",
+    "zerorpc": "0.9.8"
+  },
+  "description": ""
+}
