@@ -4,14 +4,33 @@
   <head>
     <meta charset="UTF-8">
     <title>Hello Calculator!</title>
+    <link rel="stylesheet" type="text/css" href="./main.css">
   </head>
   <body>
-    <h1>Hello Calculator!</h1>
-    <p>Input something like <code>1 + 1</code>.</p>
-    <p>This calculator supports <code>+-*/^()</code>,
-    whitespaces, and integers and floating numbers.</p>
-    <input id="formula" value="1 + 2.0 * 3.1 / (4 ^ 5.6)"></input>
-    <div id="result"></div>
+    <h1>Addition Calcultor </h1>
+    <p>Input a whole or decimal number in each box. Click the Sum button for your answer.</p>
+    <p>Note: This calculator handles negative numbers.</p>
+
+
+<div class="container"> 
+
+    <div class="integer-container"> 
+        <input class="integer" value=""></input>
+        <input class="integer" value=""></input>
+        <div class="equal-sign"> &#61; </div>
+        <div class="result" style="overflow:scroll">  </div>
+    </div>
+
+   
+
+    <button class="sum_btn" style="display: block">Sum</button>
+
+    <div class="error-message" style="visibility:hidden">
+      <span> Error: Cannot place that value there. </span>
+      <button name="close-error-btn" > &#10005 </button>
+    </div>
+
+</div>
   </body>
   <script>
     require('./renderer.js')

@@ -3,6 +3,8 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const path = require("path");
 
+//TODO: Handle integer overflow error. Make equals sign larger. Perhaps center the text in the top
+
 let mainWindow = null;
 const createWindow = () => {
   mainWindow = new BrowserWindow({ width: 800, height: 600 });
