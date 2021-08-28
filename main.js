@@ -15,9 +15,13 @@ const createWindow = () => {
       slashes: true,
     })
   );
-  mainWindow.webContents.openDevTools();
+  //mainWindow.webContents.openDevTools();
   mainWindow.on("closed", () => {
     mainWindow = null;
+  });
+
+  mainWindow.webContents.on("did-finish-load", () => {
+    mainWindow.setTitle("Calculator");
   });
 };
 app.on("ready", createWindow);

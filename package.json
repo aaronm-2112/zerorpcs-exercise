@@ -2,11 +2,14 @@
   "name": "pretty-calculator",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "test": "mocha"
   },
   "devDependencies": {
     "electron": "^1.7.6",
-    "electron-packager": "9.0.1"
+    "electron-packager": "9.0.1",
+    "mocha": "^5.0.1",
+    "spectron": "3.7.0"
   },
   "version": "1.0.0",
   "keywords": [],
