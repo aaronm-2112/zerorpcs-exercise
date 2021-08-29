@@ -105,7 +105,7 @@ Here's a blank template to get started:
 
 There are two ways to get started. If you want to run the application executable yourself (only for Darwin ) then download the ZIP file and run the 
 executable found within the "pretty-calculator-darwin-x64" folder.
-If you want to review and test the applicaton yourself, then follow the following steps. 
+If you want to review and test the applicaton yourself you need to ensure you meet the prerequisites and then move on to the installation section.
  
 
 ### Prerequisites
