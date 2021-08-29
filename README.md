@@ -121,9 +121,9 @@ Node.js.
    ```sh
    git clone https://github.com/aaronm-2112/zerorpcs-exercise
    ```
-2. Install NPM packages
+2. Install NPM packages while being sure to build the correct version of electron.
    ```sh
-   npm install
+   npm install --runtime=electron --target=1.7.6
    ```
 
 
