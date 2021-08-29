@@ -112,7 +112,7 @@ If you want to review and test the applicaton yourself, then follow the followin
 
 Download Node.js version 6.0.0 - it is recommended to use a version manager such as NVM to avoid having to replace your system's current version of 
 Node.js. 
-1. Install Node.js version 6.0.0 by finding the 6.0.0 official release at node.js.org found here: <a href="https://nodejs.org/en/download/releases/">NVM Guide</a>. Alternatively, use NVM to install Node.js 6.0.0 by following this guide at NVM's Github repo: <a href="https://github.com/nvm-sh/nvm">NVM Guide</a>
+1. Install Node.js version 6.0.0 by finding the 6.0.0 official release at node.js.org here: <a href="https://nodejs.org/en/download/releases/">node.js previous releases</a>. Alternatively, use NVM to install Node.js 6.0.0 by following this guide at NVM's Github repo: <a href="https://github.com/nvm-sh/nvm">NVM Guide</a>
  
 
 ### Installation
