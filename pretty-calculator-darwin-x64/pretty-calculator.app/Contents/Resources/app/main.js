@@ -3,6 +3,8 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const path = require("path");
 
+//TODO: Handle integer overflow error. Make equals sign larger. Perhaps center the text in the top
+
 let mainWindow = null;
 const createWindow = () => {
   mainWindow = new BrowserWindow({ width: 800, height: 600 });
@@ -13,9 +15,13 @@ const createWindow = () => {
       slashes: true,
     })
   );
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
   mainWindow.on("closed", () => {
     mainWindow = null;
+  });
+
+  mainWindow.webContents.on("did-finish-load", () => {
+    mainWindow.setTitle("Calculator");
   });
 };
 app.on("ready", createWindow);
@@ -40,15 +46,6 @@ const selectPort = () => {
   return pyPort;
 };
 
-// const createPyProc = () => {
-//   let port = "" + selectPort();
-//   let script = path.join(__dirname, "pycalc", "api.py");
-//   pyProc = require("child_process").spawn("python", [script, port]);
-//   if (pyProc != null) {
-//     console.log("child process success");
-//   }
-// };
-
 // main.js
 // the improved version
 const createPyProc = () => {
@@ -58,7 +55,7 @@ const createPyProc = () => {
   if (guessPackaged()) {
     pyProc = require("child_process").execFile(script, [port]);
   } else {
-    pyProc = require("child_process").spawn("python", [script, port]);
+    pyProc = require("child_process").spawn("python", [script, port]); // Set to system python make a note of this in the readme
   }
 
   if (pyProc != null) {
