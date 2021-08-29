@@ -36,7 +36,7 @@
     <img src="images/Screen Shot 2021-08-29 at 3.10.40 PM.png" alt="Logo" width="480" height="380">
   </a>
 
-  <h3 align="center">project_title</h3>
+  <h3 align="center">Electron Python Calculator</h3>
 
   <p align="center">
     project_description
