@@ -112,10 +112,9 @@ If you want to review and test the applicaton yourself, then follow the followin
 
 Download Node.js version 6.0.0 - it is recommended to use a version manager such as NVM to avoid having to replace your system's current version of 
 Node.js. 
-* 1. nvm
-  ```sh
-  Install NVM by following this guide at NVM's Github repo: <a href="https://github.com/nvm-sh/nvm">NVM Guide</a>
-  ```
+1. Download NVM
+   Install NVM by following this guide at NVM's Github repo: <a href="https://github.com/nvm-sh/nvm">NVM Guide</a>
+ 
 
 ### Installation
 
