@@ -103,7 +103,10 @@ Here's a blank template to get started:
 <!-- GETTING STARTED -->
 ## Getting Started
 
-To get a local copy up and running follow these simple steps.
+There are two ways to get started. If you want to run the application executable yourself (only for Darwin ) then download the ZIP file and run the 
+executable found within the "pretty-calculator-darwin-x64" folder.
+If you want to review and test the applicaton yourself, then follow the following steps. 
+ 
 
 ### Prerequisites
 
