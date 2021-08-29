@@ -15,7 +15,7 @@ const createWindow = () => {
       slashes: true,
     })
   );
-  //mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
   mainWindow.on("closed", () => {
     mainWindow = null;
   });
@@ -64,7 +64,7 @@ const createPyProc = () => {
   if (guessPackaged()) {
     pyProc = require("child_process").execFile(script, [port]);
   } else {
-    pyProc = require("child_process").spawn("python", [script, port]);
+    pyProc = require("child_process").spawn("/usr/bin/python3", [script, port]); // Set to system python make a note of this in the readme
   }
 
   if (pyProc != null) {

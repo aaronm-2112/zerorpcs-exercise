@@ -3,7 +3,9 @@ A calculator based on https://en.wikipedia.org/wiki/Reverse_Polish_notation
 """
 
 from __future__ import print_function
+from decimal import Decimal, getcontext
 
+getcontext().prec = 28
 
 def getPrec(c):
     if c in "+-":
@@ -125,48 +127,38 @@ def simplecalc(s):
 
     #get the left half of the equation 
     leftHandSide = s[0:separatorPosition]
-    print(leftHandSide)
+    
 
     # determine if a . is in the lefthand side
     leftHandSideIsDecimal = s.find('.') != -1
 
     #get thr right half of the equation
     rightHandSide = s[separatorPosition+1:]
-    print(rightHandSide)
+  
 
     # determine if right handSide is a decimal
     rightHandSideIsDecimal = s.find('.') != -1
 
 
     if leftHandSideIsDecimal or rightHandSideIsDecimal:
-        return float(handleNegatives(leftHandSide)) + float(handleNegatives(rightHandSide))
+        value =  Decimal(handleNegatives(leftHandSide)) + Decimal(handleNegatives(rightHandSide))
+        return str(value)
+        
     else: 
-        return int(handleNegatives(leftHandSide)) + int(handleNegatives(rightHandSide))
+        value =  int(handleNegatives(leftHandSide)) + int(handleNegatives(rightHandSide))
+        return str(value)
 
-
-    
-
-# if __name__ == '__main__':
-#     ss = [
-#         "1 + 2 * 3 / 4 - 5 + - 6", # -8.5
-#         "10 + ( - 1 ) ^ 4", # 11
-#         "10 + - 1 ^ 4", # 9
-#         "10 + - - 1 ^ 4", # 11
-#         "10 + - ( - 1 ^ 4 )", # 11
-#         "5 * ( 10 - 9 )", # 5
-#         "1 + 2 * 3", # 7
-#         "4 ^ 3 ^ 2", # 262144
-#         "4 ^ - 3", # 0.015625
-#         "4 ^ ( - 3 )", # 0.015625
-#     ]
-#     for s in ss:
-#         res = calc(s)
-#         print('{} = {}'.format(res, s))
 
 if __name__ == '__main__':
     ss = [
         "1|---1",
-        "2|--2"
+        "2|--2",
+        "922337203685472112375807.14|92233728921892198891289",
+        "-12.2|12",
+        ".1|.1456",
+        ".25|24",
+        "1.2121|12",
+        "1.8e308|1.8e308"
     ]
     for s in ss:
         res = simplecalc(s)

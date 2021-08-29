@@ -102,10 +102,12 @@ sumBtn.addEventListener("click", (e) => {
 
   // send the the values together in a signle string with a '+' inbetween
   // by invoking the client
+  console.log("HGere");
   client.invoke("calc", leftHandSideString, (error, res) => {
     // check for an error
     if (error) {
       console.error(error);
+      alert(error);
     } else {
       // otherwise:
       // set the result into the result div

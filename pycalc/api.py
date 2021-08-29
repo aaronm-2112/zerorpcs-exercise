@@ -1,5 +1,4 @@
 from __future__ import print_function
-from calc import calc as real_calc
 from calc import simplecalc 
 import sys
 import zerorpc
@@ -9,7 +8,9 @@ class CalcApi(object):
         """based on the input text, return the int result"""
         try:
             return simplecalc(text)
+   
         except Exception as e:
+            print(e)
             return 0.0
     def echo(self, text):
         """echo any text"""
