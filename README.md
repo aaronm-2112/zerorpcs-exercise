@@ -94,9 +94,9 @@ Here's a blank template to get started:
 
 ### Built With
 
-* []() yorba mate
-* []()
-* []()
+* []() Electron - Javascript, HTML5, CSS3
+* []() Python 
+* []() Zerorpc
 
 
 
