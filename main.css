@@ -4,10 +4,30 @@ body {
   background-color: #f4f4f4;
 }
 
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header h1 {
+  margin-bottom: 5px;
+}
+
+header p {
+  margin-bottom: 0px;
+  margin-top: 5px;
+}
+
+.note {
+  font-size: large;
+}
+
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 50px;
 }
 
 .integer-container {
@@ -21,12 +41,15 @@ input {
   font-size: medium;
   font-weight: 700;
   width: 100px;
+  text-align: center;
 }
 
 .result {
   height: 105px;
   width: 100px;
   background-color: white;
+  text-align: center;
+  line-height: 105px;
 }
 
 .sum_btn {
@@ -47,4 +70,8 @@ input {
 .equal-sign {
   line-height: 120px;
   margin-right: 20px;
+}
+
+.equal-sign {
+  font-size: xx-large;
 }
