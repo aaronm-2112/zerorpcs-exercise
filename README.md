@@ -116,7 +116,7 @@ Node.js.
 2. Install Python. Python 3 is recommended as Python 2 has been sunsetted since January 1, 2020. You can download python 3 here: <a href="https://www.python.org/downloads/">Python 3 Downloads </a>. It is also recommended to add Python 3 to your system's path. If you decide to use Python 2 there is no guarantee the app will run correctly.
  
 
-### Installation
+### Installation - Electron Part
 
 1. Clone the repo
    ```sh
@@ -126,6 +126,9 @@ Node.js.
    ```sh
    npm install --runtime=electron --target=1.7.6
    ```
+   
+   
+### Installation - Python Part
 
 
 
