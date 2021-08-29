@@ -110,10 +110,11 @@ If you want to review and test the applicaton yourself, then follow the followin
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
+Download Node.js version 6.0.0 - it is recommended to use a version manager such as NVM to avoid having to replace your system's current version of 
+Node.js. 
+* 1. nvm
   ```sh
-  npm install npm@latest -g
+  Install NVM by following this guide at NVM's Github repo: <a href="https://github.com/nvm-sh/nvm">NVM Guide</a>
   ```
 
 ### Installation
