@@ -129,6 +129,10 @@ Node.js.
    
    
 ### Installation - Python Part
+1. Use pip to install the necessary package:
+   ```sh
+   pip zerorpc
+   ```
 
 
 
