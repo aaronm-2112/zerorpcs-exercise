@@ -22,7 +22,7 @@
   <h3 align="center">Electron Python Calculator</h3>
 
   <p align="center">
-    A simple desktop calculator built with Electron and Zerorpc. 
+    A simple client-server desktop calculator built with Electron and Python. 
   </p>
 </p>
 
