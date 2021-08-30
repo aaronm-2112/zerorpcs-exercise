@@ -55,42 +55,47 @@ const createPyProc = () => {
   if (guessPackaged()) {
     pyProc = require("child_process").execFile(script, [port]);
   } else {
-    pyProc = require("child_process").spawn("python", [script, port]); // Set to system python make a note of this in the readme
+    pyProc = require("child_process").spawn("python", [script, port]); // Replace 'python' with the system path to your python directory here
+
+    if (pyProc != null) {
+      //console.log(pyProc)
+      console.log("child process success on port " + port);
+    }
   }
 
-  if (pyProc != null) {
-    //console.log(pyProc)
-    console.log("child process success on port " + port);
-  }
-};
+  const exitPyProc = () => {
+    pyProc.kill();
+    pyProc = null;
+    pyPort = null;
+  };
 
-const exitPyProc = () => {
-  pyProc.kill();
-  pyProc = null;
-  pyPort = null;
-};
+  app.on("ready", createPyProc);
+  app.on("will-quit", exitPyProc);
 
-app.on("ready", createPyProc);
-app.on("will-quit", exitPyProc);
+  // check for an executable
+  // main.js
 
-// check for an executable
-// main.js
+  const PY_DIST_FOLDER = "pycalcdist";
+  const PY_FOLDER = "pycalc";
+  const PY_MODULE = "api"; // without .py suffix
 
-const PY_DIST_FOLDER = "pycalcdist";
-const PY_FOLDER = "pycalc";
-const PY_MODULE = "api"; // without .py suffix
+  const guessPackaged = () => {
+    const fullPath = path.join(__dirname, PY_DIST_FOLDER);
+    return require("fs").existsSync(fullPath);
+  };
 
-const guessPackaged = () => {
-  const fullPath = path.join(__dirname, PY_DIST_FOLDER);
-  return require("fs").existsSync(fullPath);
-};
-
-const getScriptPath = () => {
-  if (!guessPackaged()) {
-    return path.join(__dirname, PY_FOLDER, PY_MODULE + ".py");
-  }
-  if (process.platform === "win32") {
-    return path.join(__dirname, PY_DIST_FOLDER, PY_MODULE, PY_MODULE + ".exe");
-  }
-  return path.join(__dirname, PY_DIST_FOLDER, PY_MODULE, PY_MODULE);
+  const getScriptPath = () => {
+    if (!guessPackaged()) {
+      return path.join(__dirname, PY_FOLDER, PY_MODULE + ".py");
+    }
+    if (process.platform === "win32") {
+      return path.join(
+        __dirname,
+        PY_DIST_FOLDER,
+        PY_MODULE,
+        PY_MODULE + ".exe"
+      );
+    }
+    return path.join(__dirname, PY_DIST_FOLDER, PY_MODULE, PY_MODULE);
+  };
 };
