@@ -115,9 +115,44 @@ This will run the electron application using the bundled Python server found in 
 
 After running npm start, simply follow the on screen instructions to begin using the calculator. 
 
+## Known errors and fixes
 Note: You may need to wait for the Python server to start before getting any sum results on start up. If you never receive any results when clicking the sum button, and you have deleted the pycalcdist folder, you may need to navigate to main.js and change the python command found in createPyProc to the path of your python installation - in particular, the one that is connected to the version of pip you used to install zerorpc.
 
 <img src="images/python-command.png">
+
+
+
+If the above does not give you a response back from the Python server, then it may be an issue with your installation of Zeromq. To fix this, try the below steps:
+
+```sh
+  # uninstall your node_modules with
+  rm -rf node_modules 
+  
+  # clear relevant caches
+  rm -rf ~/.node-gyp
+  rm -rf ~/.electron-gyp
+  
+  # set the npm config environment variables
+  export npm_config_target=1.7.6 # electron version
+  export npm_config_runtime=electron
+  export npm_config_disturl=https://atom.io/download/electron
+  export npm_config_build_from_source=true
+
+  # may not be necessary
+  #export npm_config_arch=x64
+  #export npm_config_target_arch=x64
+
+  # run npm config ls to see if the aboce environment variables have been set for your current terminal session
+  npm config ls
+  
+  # then install everything again -- without the set target command used above
+  npm install 
+  
+  # at this point you should no longer have any issues with the application. Remember to wait on first startup for the Python server to connect
+  npm start
+  
+  
+```
 
 
 
