@@ -3,10 +3,9 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const path = require("path");
 
-//TODO: Handle integer overflow error. Make equals sign larger. Perhaps center the text in the top
-
 let mainWindow = null;
 const createWindow = () => {
+  console.log("SH");
   mainWindow = new BrowserWindow({ width: 800, height: 600 });
   mainWindow.loadURL(
     require("url").format({
@@ -15,6 +14,7 @@ const createWindow = () => {
       slashes: true,
     })
   );
+
   // mainWindow.webContents.openDevTools();
   mainWindow.on("closed", () => {
     mainWindow = null;
@@ -36,8 +36,7 @@ app.on("activate", () => {
   }
 });
 
-// add these to the end or middle of main.js
-
+// code for spawning a process that runs the Python server
 let pyProc = null;
 let pyPort = null;
 
@@ -48,19 +47,23 @@ const selectPort = () => {
 
 // main.js
 // the improved version
+// checks if the python server has been packaged and executes the file if so
+// otherwise it spawns a new child process using the system python to run the Python server
 const createPyProc = () => {
   let script = getScriptPath();
   let port = "" + selectPort();
+  console.log("Create py proc");
 
   if (guessPackaged()) {
+    console.log("here");
     pyProc = require("child_process").execFile(script, [port]);
   } else {
-    pyProc = require("child_process").spawn("python", [script, port]); // Set to system python make a note of this in the readme
-  }
+    console.log("Here");
+    pyProc = require("child_process").spawn("/usr/bin/python3", [script, port]); // Replace 'python' with the system path to your python directory here
 
-  if (pyProc != null) {
-    //console.log(pyProc)
-    console.log("child process success on port " + port);
+    if (pyProc != null) {
+      console.log("child process success on port " + port);
+    }
   }
 };
 

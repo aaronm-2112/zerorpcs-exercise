@@ -103,12 +103,12 @@ sumBtn.addEventListener("click", (e) => {
     leftHandSide.push(value);
   });
 
-  // join the values into a string with a '+' as a separator
-  let leftHandSideString = leftHandSide.join("|");
+  // join the values into a string with a '|' as a separator
+  let integersString = leftHandSide.join("|");
 
   // send the the values together in a signle string with a '+' inbetween
   // by invoking the client
-  client.invoke("calc", leftHandSideString, (error, res) => {
+  client.invoke("calc", integersString, (error, res) => {
     // check for an error
     if (error) {
       console.error(error);

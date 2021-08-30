@@ -38,7 +38,7 @@ describe("Application launch", function () {
 
   it("shows the correct h1", function () {
     return this.app.client.getText("h1").then(function (text) {
-      assert.equal(text, "Addition Calculator");
+      assert.equal(text, "Calculator");
     });
   });
 
