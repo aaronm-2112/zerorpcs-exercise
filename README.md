@@ -156,9 +156,12 @@ Note: You may need to wait for the Python server to connect before getting any r
 
 
 
-Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
+### Testing the app
+To test the application simply run the following command in the project directory: 
+  ```sh
+   npm start
+  ```
+ 
 
 
 
