@@ -150,7 +150,7 @@ This will run the electron application using the bundled Python server found in 
 
 From here simply follow the on screen instructions to begin using the calculator. 
 
-Note: You may need to wait for the Python server to connect before getting any results when interacting with the calculator for the first time on start up. If you never receive any results and you have deleted the pycalcdist folder you may need to change the python command found in main.js to the path of your python installation that you used pip to install zerorpc with.
+Note: You may need to wait for the Python server to connect before getting any results when interacting with the calculator for the first time on start up. If you never receive any results and you have deleted the pycalcdist folder you may need to navigate to main.js and change the python command found in createPyProc to the path of your python installation that is connected to the version of pip you used to install zerorpc.
 
 <img src="images/python-command.png">
 
