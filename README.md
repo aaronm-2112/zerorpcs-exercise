@@ -55,12 +55,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-Here's a blank template to get started:
-**To avoid retyping too much info. Do a search and replace with your text editor for the following:**
-`github_username`, `repo_name`, `twitter_handle`, `email`, `project_title`, `project_description`
+This calculator allows you to perform simple addition and subtraction. It uses Electron as a GUI and communicates via RPCs using zerorpc to a Python server that performs the arithmetic operations. It is heavily informed by Github user fyears's project electron-python-example. 
 
 
 ### Built With
