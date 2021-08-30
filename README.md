@@ -159,7 +159,7 @@ Note: You may need to wait for the Python server to connect before getting any r
 ### Testing the app
 To test the application simply run the following command in the project directory: 
   ```sh
-   npm start
+   npm test
   ```
  
 
