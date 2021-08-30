@@ -142,7 +142,7 @@ If the above does not give you a response back from the Python server, then it m
   #export npm_config_arch=x64
   #export npm_config_target_arch=x64
 
-  # run npm config ls to see if the aboce environment variables have been set for your current terminal session
+  # run npm config ls to see if the above environment variables have been set for your current terminal session
   npm config ls
   
   # then install everything again -- without the set target command used above
