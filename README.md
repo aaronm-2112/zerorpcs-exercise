@@ -71,7 +71,7 @@ This calculator allows you to perform simple addition and subtraction. It uses E
 
 There are two ways to get started. If you want to run the application executable yourself (only for Darwin ) then download the ZIP file and run the 
 executable found within the "pretty-calculator-darwin-x64" folder.
-If you want to review and test the applicaton yourself you need to ensure you meet the prerequisites and then move on to the installation section.
+If you want to review and test the application yourself you need to ensure you meet perform the steps outlined in the prerequisites section. Then move on to the installation section and complete the steps there.
  
 
 ### Prerequisites
