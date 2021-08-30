@@ -78,9 +78,9 @@ If you want to review and test the application yourself you need to ensure you p
 
 Download Node.js version 6.0.0 - it is recommended to use a version manager such as NVM to avoid having to replace your system's current version of 
 Node.js. 
-1. Install Node.js version 6.0.0 by finding the 6.0.0 official release at node.js.org here: <a href="https://nodejs.org/en/download/releases/">node.js previous releases</a>. Alternatively, use NVM to install Node.js 6.0.0 by following this guide at NVM's Github repo: <a href="https://github.com/nvm-sh/nvm">NVM Guide</a>
+1. Install Node.js version 6.0.0 by finding the 6.0.0 official release at nodejs.org here: <a href="https://nodejs.org/en/download/releases/">nodejs previous releases</a>. Alternatively, use NVM to install Nodejs 6.0.0 by following this guide at NVM's Github repo: <a href="https://github.com/nvm-sh/nvm">NVM Guide</a>
 2. Install Python. Python 3 is recommended as Python 2 has been sunsetted since January 1, 2020. You can download python 3 here: <a href="https://www.python.org/downloads/">Python 3 Downloads </a>. It is also recommended to add Python 3 to your system's path. If you decide to use Python 2 there is no guarantee the app will run correctly.
-3. For using zerorpc, you will also need the C/C++ compilers (cc and c++ in the command line, and/or MSVC on Windows).
+3. For using zerorpc, you will also need the C/C++ compilers if they are not already installed on your system (cc and c++ in the command line, and/or MSVC on Windows).
  
 
 ### Installation - Electron Part
@@ -114,9 +114,9 @@ To start the app simply run:
   
 This will run the electron application using the bundled Python server found in the pycalcdist folder. If you want the Electron application to connect to the python server that hasn't been bundled (which is in the pycalc folder ) simply delete the pycalcdist folder.
 
-From here simply follow the on screen instructions to begin using the calculator. 
+After running npm start, simply follow the on screen instructions to begin using the calculator. 
 
-Note: You may need to wait for the Python server to connect before getting any results when interacting with the calculator for the first time on start up. If you never receive any results and you have deleted the pycalcdist folder you may need to navigate to main.js and change the python command found in createPyProc to the path of your python installation that is connected to the version of pip you used to install zerorpc.
+Note: You may need to wait for the Python server to start before getting any sum results on start up. If you never receive any results when clicking the sum button, and you have deleted the pycalcdist folder, you may need to navigate to main.js and change the python command found in createPyProc to the path of your python installation - in particular, the one that is connected to the version of pip you used to install zerorpc.
 
 <img src="images/python-command.png">
 
