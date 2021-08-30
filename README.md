@@ -114,6 +114,7 @@ Download Node.js version 6.0.0 - it is recommended to use a version manager such
 Node.js. 
 1. Install Node.js version 6.0.0 by finding the 6.0.0 official release at node.js.org here: <a href="https://nodejs.org/en/download/releases/">node.js previous releases</a>. Alternatively, use NVM to install Node.js 6.0.0 by following this guide at NVM's Github repo: <a href="https://github.com/nvm-sh/nvm">NVM Guide</a>
 2. Install Python. Python 3 is recommended as Python 2 has been sunsetted since January 1, 2020. You can download python 3 here: <a href="https://www.python.org/downloads/">Python 3 Downloads </a>. It is also recommended to add Python 3 to your system's path. If you decide to use Python 2 there is no guarantee the app will run correctly.
+3. For using zerorpc, you will also need the C/C++ compilers (cc and c++ in the command line, and/or MSVC on Windows).
  
 
 ### Installation - Electron Part
