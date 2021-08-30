@@ -12,23 +12,6 @@
 
 
 
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
-
-
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
@@ -39,16 +22,7 @@
   <h3 align="center">Electron Python Calculator</h3>
 
   <p align="center">
-    A simple desktop calculator built with Electron and Zerorpc. 
-    <br />
-    <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/github_username/repo_name">View Demo</a>
-    ·
-    <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/github_username/repo_name/issues">Request Feature</a>
+    A simple client-server desktop calculator built with Electron and Python. 
   </p>
 </p>
 
@@ -72,10 +46,6 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
 </details>
@@ -84,12 +54,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-Here's a blank template to get started:
-**To avoid retyping too much info. Do a search and replace with your text editor for the following:**
-`github_username`, `repo_name`, `twitter_handle`, `email`, `project_title`, `project_description`
+This calculator allows you to perform simple addition and subtraction. It uses Electron as a GUI and communicates via RPCs using zerorpc to a Python server that performs the arithmetic operations. It is heavily informed by Github user fyears's project electron-python-example. 
 
 
 ### Built With
@@ -105,16 +70,16 @@ Here's a blank template to get started:
 
 There are two ways to get started. If you want to run the application executable yourself (only for Darwin ) then download the ZIP file and run the 
 executable found within the "pretty-calculator-darwin-x64" folder.
-If you want to review and test the applicaton yourself you need to ensure you meet the prerequisites and then move on to the installation section.
+If you want to review and test the application yourself you need to ensure you perform the steps outlined in the prerequisites section. Then move on to the installation section and complete the steps there.
  
 
 ### Prerequisites
 
 Download Node.js version 6.0.0 - it is recommended to use a version manager such as NVM to avoid having to replace your system's current version of 
 Node.js. 
-1. Install Node.js version 6.0.0 by finding the 6.0.0 official release at node.js.org here: <a href="https://nodejs.org/en/download/releases/">node.js previous releases</a>. Alternatively, use NVM to install Node.js 6.0.0 by following this guide at NVM's Github repo: <a href="https://github.com/nvm-sh/nvm">NVM Guide</a>
+1. Install Node.js version 6.0.0 by finding the 6.0.0 official release at nodejs.org here: <a href="https://nodejs.org/en/download/releases/">nodejs previous releases</a>. Alternatively, use NVM to install Nodejs 6.0.0 by following this guide at NVM's Github repo: <a href="https://github.com/nvm-sh/nvm">NVM Guide</a>
 2. Install Python. Python 3 is recommended as Python 2 has been sunsetted since January 1, 2020. You can download python 3 here: <a href="https://www.python.org/downloads/">Python 3 Downloads </a>. It is also recommended to add Python 3 to your system's path. If you decide to use Python 2 there is no guarantee the app will run correctly.
-3. For using zerorpc, you will also need the C/C++ compilers (cc and c++ in the command line, and/or MSVC on Windows).
+3. For using zerorpc, you will also need the C/C++ compilers if they are not already installed on your system (cc and c++ in the command line, and/or MSVC on Windows).
  
 
 ### Installation - Electron Part
@@ -148,61 +113,25 @@ To start the app simply run:
   
 This will run the electron application using the bundled Python server found in the pycalcdist folder. If you want the Electron application to connect to the python server that hasn't been bundled (which is in the pycalc folder ) simply delete the pycalcdist folder.
 
-From here simply follow the on screen instructions to begin using the calculator. 
+After running npm start, simply follow the on screen instructions to begin using the calculator. 
 
-Note: You may need to wait for the Python server to connect before getting any results when interacting with the calculator for the first time on start up. If you never receive any results and you have deleted the pycalcdist folder you may need to change the python command found in main.js to the path of your python installation that you used pip to install zerorpc with.
+Note: You may need to wait for the Python server to start before getting any sum results on start up. If you never receive any results when clicking the sum button, and you have deleted the pycalcdist folder, you may need to navigate to main.js and change the python command found in createPyProc to the path of your python installation - in particular, the one that is connected to the version of pip you used to install zerorpc.
 
-
-
-
-Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
+<img src="images/python-command.png">
 
 
 
-<!-- ROADMAP -->
-## Roadmap
-
-See the [open issues](https://github.com/github_username/repo_name/issues) for a list of proposed features (and known issues).
-
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-
-
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE` for more information.
-
-
-
-<!-- CONTACT -->
-## Contact
-
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email
-
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
-
-
+### Testing the app
+To test the application simply run the following command in the project directory: 
+  ```sh
+   npm test
+  ```
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
 
-* []()
-* []()
-* []()
+* []() Github user othneildrew for the readme template: https://github.com/othneildrew/Best-README-Template
+* []() Github user fyears for the project architecture, skeleton, and packaging:  https://github.com/fyears/electron-python-example
 
 
 
