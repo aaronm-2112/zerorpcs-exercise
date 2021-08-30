@@ -154,6 +154,8 @@ If the above does not give you a response back from the Python server, then it m
   
 ```
 
+Finally, Ubuntu 20 may have problems running Electron due to incompatabilities with Harfbuzz. If you receive that error, check at this stack exchange post for a solution that may work for you. <a href="https://unix.stackexchange.com/questions/589993/pango-error-harfbuzz-version-too-old">Stack Exchange Post </a>
+
 
 
 ### Testing the app
