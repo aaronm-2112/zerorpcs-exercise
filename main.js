@@ -58,7 +58,7 @@ const createPyProc = () => {
     pyProc = require("child_process").execFile(script, [port]);
   } else {
     console.log("Here");
-    pyProc = require("child_process").spawn("/usr/bin/python3", [script, port]); // Replace 'python' with the system path to your python directory here
+    pyProc = require("child_process").spawn("python", [script, port]); // Replace 'python' with the system path to your python directory here
 
     if (pyProc != null) {
       console.log("child process success on port " + port);
