@@ -166,7 +166,7 @@ To test the application simply run the following command in the project director
 ## Acknowledgements
 
 * []() Github user othneildrew for the readme template: https://github.com/othneildrew/Best-README-Template
-* []() Github user fyears for the project architecture, skeleton, and packaging:  https://github.com/fyears/electron-python-example
+* []() Github user fyears for the project architecture, code and guide skeleton, and packaging:  https://github.com/fyears/electron-python-example
 
 
 
