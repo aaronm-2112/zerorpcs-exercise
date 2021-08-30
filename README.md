@@ -54,7 +54,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-This calculator allows you to perform simple addition and subtraction. It uses Electron as a GUI and communicates via RPCs using zerorpc to a Python server that performs the arithmetic operations. It is heavily informed by Github user fyears's project electron-python-example. 
+This calculator allows you to perform simple addition and subtraction. It uses Electron as a GUI and communicates via RPCs using zerorpc to a Python server that performs the arithmetic operations. It is heavily informed by Github user fyears's project electron-python-example. It installation, testing, and running works on MacOS, but has not yet been tested on Windows or Linux.
 
 
 ### Built With
