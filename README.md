@@ -122,7 +122,7 @@ Note: You may need to wait for the Python server to start before getting any sum
 
 
 
-If the above does not give you a response back from the Python server, then it may be an issue with your installation of Zeromq. To fix this, try the below steps:
+If the above does not give you a response back from the Python server, then it may be an issue with your installation of Zeromq and Electron. To fix this, try the below steps:
 
 ```sh
   # uninstall your node_modules with
