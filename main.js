@@ -5,7 +5,6 @@ const path = require("path");
 
 let mainWindow = null;
 const createWindow = () => {
-  console.log("SH");
   mainWindow = new BrowserWindow({ width: 800, height: 600 });
   mainWindow.loadURL(
     require("url").format({
@@ -15,7 +14,7 @@ const createWindow = () => {
     })
   );
 
-  // mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
   mainWindow.on("closed", () => {
     mainWindow = null;
   });
