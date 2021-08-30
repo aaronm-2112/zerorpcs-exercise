@@ -1,9 +1,11 @@
+/*  Document level   */
 body {
   font-size: larger;
   font-weight: 700;
   background-color: #f4f4f4;
 }
 
+/*  header elements  */
 header {
   display: flex;
   flex-direction: column;
@@ -23,6 +25,7 @@ header p {
   font-size: large;
 }
 
+/*  Main Container  */
 .container {
   display: flex;
   flex-direction: column;
@@ -30,6 +33,7 @@ header p {
   margin-top: 50px;
 }
 
+/* Calculator inputs and result  */
 .integer-container {
   display: flex;
   justify-content: space-evenly;
@@ -44,6 +48,15 @@ input {
   text-align: center;
 }
 
+.equal-sign {
+  line-height: 120px;
+  margin-right: 20px;
+}
+
+.equal-sign {
+  font-size: xx-large;
+}
+
 .result {
   height: 105px;
   width: 100px;
@@ -52,6 +65,7 @@ input {
   line-height: 105px;
 }
 
+/*  Sum button -- below the calculator  */
 .sum_btn {
   margin: 20px 0px;
   margin-right: 20px;
@@ -60,18 +74,10 @@ input {
   cursor: pointer;
 }
 
+/* Error message */
 .error-message {
   background-color: lightcoral;
 }
 .error-message button {
   cursor: pointer;
-}
-
-.equal-sign {
-  line-height: 120px;
-  margin-right: 20px;
-}
-
-.equal-sign {
-  font-size: xx-large;
 }

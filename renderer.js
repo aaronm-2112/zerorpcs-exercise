@@ -40,12 +40,13 @@ function validDecimalSeparator(s) {
   return true;
 }
 
+// Write the given string input into the error message container and make the error visible to the user
 function writeError(s) {
   errorMessageBox.firstElementChild.textContent = s;
   errorMessageBox.style = "visibilty: visible";
 }
 
-// register change handlers for the integer inputs -- only allow numbers or decimals or minus signs
+// register change handlers for the integer inputs -- only allow numbers, decimals, or minus signs
 let integerInputs = document.querySelectorAll(".integer");
 integerInputs.forEach((input) => {
   input.addEventListener("input", (e) => {
@@ -83,9 +84,14 @@ integerInputs.forEach((input) => {
   });
 });
 
+// select the sum button used to begin calculations
 let sumBtn = document.querySelector(".sum_btn");
+
+// select the result div used to display the result of calculations
 let result = document.querySelector(".result");
-// add a listener to handle the sum event
+
+// add a listener to the sum button that takes both user given numbers and sends them to the Pyton server for calculation
+// place the result of that calculation in the result div
 sumBtn.addEventListener("click", (e) => {
   // get the sum inputs
   let integerInputs = document.querySelectorAll(".integer");
@@ -102,12 +108,10 @@ sumBtn.addEventListener("click", (e) => {
 
   // send the the values together in a signle string with a '+' inbetween
   // by invoking the client
-  console.log("HGere");
   client.invoke("calc", leftHandSideString, (error, res) => {
     // check for an error
     if (error) {
       console.error(error);
-      alert(error);
     } else {
       // otherwise:
       // set the result into the result div
@@ -119,7 +123,7 @@ sumBtn.addEventListener("click", (e) => {
 // Event for closing the error message box
 let errorMessageBox = document.querySelector(".error-message");
 errorMessageBox.addEventListener("click", function (e) {
-  // hide the error message when the 'x' button is clicked
+  // hide the error message when the 'x' button is clicked (event is caught in the bubbling phase)
   if (e.target.name == "close-error-btn") {
     // hide the error message box
     this.style = "visibility: hidden";
