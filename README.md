@@ -146,7 +146,13 @@ To start the app simply run:
    npm start
   ```
   
-This will run the electron application using the bundled zerorpc server found in the pycalcdist folder. If you want the Electron application to connect to the python server that hasn't been bundled (which is in the pycalc folder ) simply delete the pycalcdist folder.  
+This will run the electron application using the bundled Python server found in the pycalcdist folder. If you want the Electron application to connect to the python server that hasn't been bundled (which is in the pycalc folder ) simply delete the pycalcdist folder.
+
+From here simply follow the on screen instructions to begin using the calculator. 
+
+Note: You may need to wait for the Python server to connect before getting any results when interacting with the calculator for the first time on start up. If you never receive any results and you have deleted the pycalcdist folder you may need to change the python command found in main.js to the path of your python installation that you used pip to install zerorpc with.
+
+
 
 
 Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
