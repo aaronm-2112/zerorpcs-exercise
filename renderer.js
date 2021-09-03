@@ -7,6 +7,7 @@ client.connect("tcp://127.0.0.1:4242");
 //        an output argument, called error. If the status variable returned is false, that output variable has been modified.
 //        Use it in writing the error message to the user. If the status is true, then do nothing with the error.
 
+// Code for handling input sanitization -------------------------------------------------------------------------------------------------------
 // Input: A string with numbers and '-' signs. Assume the string is non-empty.
 // Output: A boolean. True if there is only one minus sign that is to the left of all numbers and decimal separators.
 //        False if there is already a minus sign in the string or if the minus sign is to the right of a number or decimal separator
@@ -91,82 +92,87 @@ function validCharacter(inputCharacter) {
   );
 }
 
-// Write the given string input into the error message container and make the error visible to the user
-function writeError(s) {
-  errorMessageBox.firstElementChild.textContent = s;
-  errorMessageBox.style = "visibilty: visible";
+function sanitizeInput(e) {
+  // get the current input value
+  let currentValue = e.target.value;
+  // get the most recently added value
+  let newInputIdx = e.target.selectionStart - 1;
+  let newInput = e.target.value[newInputIdx];
+
+  // check if the new input is an invalid character
+  if (!validCharacter(newInput)) {
+    writeError("Error: Invalid character");
+    e.target.value =
+      currentValue.slice(0, newInputIdx) + currentValue.slice(newInputIdx + 1);
+    e.target.selectionStart = newInputIdx;
+    return;
+  }
+
+  // check if the input value is a minus sign
+  if (newInput.charCodeAt(0) == 45) {
+    let error = { message: "" };
+    if (!validMinusSignPlacement(currentValue, error)) {
+      e.target.value =
+        currentValue.slice(0, newInputIdx) +
+        currentValue.slice(newInputIdx + 1);
+      e.target.selectionStart = newInputIdx;
+      writeError(error.message);
+    }
+    return;
+  }
+
+  // check if input value is a decimal separator
+  if (newInput.charCodeAt(0) == 46) {
+    let error = { message: "" };
+    if (!validDecimalSeparatorPlacement(currentValue, error)) {
+      e.target.value =
+        currentValue.slice(0, newInputIdx) +
+        currentValue.slice(newInputIdx + 1);
+      e.target.selectionStart = newInputIdx;
+      writeError(error.message);
+    }
+    return;
+  }
+
+  // a valid character representing a number 0-9
+  if (newInput.charCodeAt(0) >= 48 && newInput.charCodeAt(0) <= 58) {
+    if (!validCharacterPlacement(currentValue)) {
+      e.target.value =
+        currentValue.slice(0, newInputIdx) +
+        currentValue.slice(newInputIdx + 1);
+      e.target.selectionStart = newInputIdx;
+      writeError("Error: A number cannot be placed in front of a minus sign.");
+    }
+  }
 }
 
 // register change handlers for the integer inputs -- only allow numbers, decimals, or minus signs
 let integerInputs = document.querySelectorAll(".integer");
 integerInputs.forEach((input) => {
-  input.addEventListener("input", (e) => {
-    // get the current input value
-    let currentValue = e.target.value;
-    // get the most recently added value
-    let newInputIdx = e.target.selectionStart - 1;
-    let newInput = e.target.value[newInputIdx];
-
-    // check if the new input is an invalid character
-    if (!validCharacter(newInput)) {
-      writeError("Error: Invalid character");
-      e.target.value =
-        currentValue.slice(0, newInputIdx) +
-        currentValue.slice(newInputIdx + 1);
-      e.target.selectionStart = newInputIdx;
-      return;
-    }
-
-    // check if the input value is a minus sign
-    if (newInput.charCodeAt(0) == 45) {
-      let error = { message: "" };
-      if (!validMinusSignPlacement(currentValue, error)) {
-        e.target.value =
-          currentValue.slice(0, newInputIdx) +
-          currentValue.slice(newInputIdx + 1);
-        e.target.selectionStart = newInputIdx;
-        writeError(error.message);
-      }
-      return;
-    }
-
-    // check if input value is a decimal separator
-    if (newInput.charCodeAt(0) == 46) {
-      let error = { message: "" };
-      if (!validDecimalSeparatorPlacement(currentValue, error)) {
-        e.target.value =
-          currentValue.slice(0, newInputIdx) +
-          currentValue.slice(newInputIdx + 1);
-        e.target.selectionStart = newInputIdx;
-        writeError(error.message);
-      }
-      return;
-    }
-
-    // a valid character representing a number 0-9
-    if (newInput.charCodeAt(0) >= 48 && newInput.charCodeAt(0) <= 58) {
-      if (!validCharacterPlacement(currentValue)) {
-        e.target.value =
-          currentValue.slice(0, newInputIdx) +
-          currentValue.slice(newInputIdx + 1);
-        e.target.selectionStart = newInputIdx;
-        writeError(
-          "Error: A number cannot be placed in front of a minus sign."
-        );
-      }
-    }
-  });
+  input.addEventListener("input", sanitizeInput);
 });
 
-// select the sum button used to begin calculations
-let sumBtn = document.querySelector(".sum_btn");
+// Handle logic for creating a sum, validating if a sum can be created, and displaying the sum ------------------------------------------------
 
 // select the result div used to display the result of calculations
 let result = document.querySelector(".result");
 
-// add a listener to the sum button that takes both user given numbers and sends them to the Pyton server for calculation
+// select the sum button used to begin calculations
+let sumBtn = document.querySelector(".sum_btn");
+
+// add a listener to the sum button that takes both user given numbers and sends them to the Python server for calculation
 // place the result of that calculation in the result div
 sumBtn.addEventListener("click", (e) => {
+  // validate that both inputs have input values that can be used to create a sum
+  let error = { message: "" };
+  if (!inputsCanCreateSum(error)) {
+    writeError(error.message);
+    return;
+  }
+
+  // hide the errir message box if it is still showing
+  errorMessageBox.style = "visibility: hidden";
+
   // get the sum inputs
   let integerInputs = document.querySelectorAll(".integer");
   // create an array that will store the individual values
@@ -193,6 +199,48 @@ sumBtn.addEventListener("click", (e) => {
     }
   });
 });
+
+// Input: A mutable error object.
+// output: Boolean. Can be true or false. True when both inputs have at least one number. False when one input does not.
+function inputsCanCreateSum(error) {
+  // track if each input is valid -- meaning, can it be used to create a sum or not
+  let validInputs = [false, false];
+
+  // get both inputs and validate them
+  integerInputs.forEach((input, key) => {
+    // get the current input
+    let currentValue = input.value;
+
+    // iterate through the input's characters
+    for (const char of currentValue) {
+      // check if the current character's character code is that of a number
+      if (char.charCodeAt(0) >= 48 && char.charCodeAt(0) <= 58) {
+        // mark the current input box as a valid input
+        validInputs[key] = true;
+      }
+    }
+  });
+
+  // check if at least one input is invalid
+  if (!validInputs[0] || !validInputs[1]) {
+    // spawn an error message telling the user that we cannot create a sum unless they provide numbers in each input box
+    error.message =
+      "Error: You must place numbers in both boxes before you can create a sum.";
+    // notify the caller that the inputs do not have numbers and cannot create a sun
+    return false;
+  }
+
+  // notify the caller that the inputs can be used to create a sum
+  return true;
+}
+
+// Handle logic for the error message box -----------------------------------------------------------------------------------
+
+// Write the given string input into the error message container and make the error visible to the user
+function writeError(s) {
+  errorMessageBox.firstElementChild.textContent = s;
+  errorMessageBox.style = "visibilty: visible";
+}
 
 // Event for closing the error message box
 let errorMessageBox = document.querySelector(".error-message");
