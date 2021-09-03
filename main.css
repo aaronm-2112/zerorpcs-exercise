@@ -57,6 +57,11 @@ input {
   font-size: xx-large;
 }
 
+.addition-symbol {
+  line-height: 120px;
+  margin-right: 20px;
+}
+
 .result {
   height: 105px;
   width: 100px;

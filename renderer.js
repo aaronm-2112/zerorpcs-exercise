@@ -3,41 +3,92 @@ const zerorpc = require("zerorpc");
 let client = new zerorpc.Client();
 client.connect("tcp://127.0.0.1:4242");
 
-// Input: A string with numbers and '-' signs. Assume the string is non-empty.
-// Output: A boolean. True if negative signs are to the left of numbers. False if negative signs are to the right.
-function validMinusSignPlacement(s) {
-  // get the last value -- should be a minus sign
-  let minusSign = s[s.length - 1];
+// Note: The error handling in this minor project uses a 'function that acts as a procedure' approach. Any function that can have an error will take
+//        an output argument, called error. If the status variable returned is false, that output variable has been modified.
+//        Use it in writing the error message to the user. If the status is true, then do nothing with the error.
 
-  // iterate from the last position to the first position
-  for (let idx = s.length - 1; idx >= 0; idx--) {
-    // check if the charcatcer code in each position is not equal to the value for a minus sign
-    if (s.charCodeAt(idx) != minusSign.charCodeAt(0)) {
-      // return false as the position is invalid
-      return false;
+// Input: A string with numbers and '-' signs. Assume the string is non-empty.
+// Output: A boolean. True if there is only one minus sign that is to the left of all numbers and decimal separators.
+//        False if there is already a minus sign in the string or if the minus sign is to the right of a number or decimal separator
+function validMinusSignPlacement(s, error) {
+  // create an array from the input
+  let stringArray = s.split("");
+  const MINUS_SIGN_CHARACTER_CODE = 45;
+
+  // filter out the minus signs from the input array
+  let minusSigns = stringArray.filter((elem) => {
+    return elem.charCodeAt(0) == MINUS_SIGN_CHARACTER_CODE;
+  });
+
+  // true if there is only one minus sign, false if there are two or more
+  let hasValidMinusSignAmt = minusSigns.length <= 1;
+
+  // return false if the minus sign amount is invalid
+  if (!hasValidMinusSignAmt) {
+    error.message = "Error: There can only be one minus sign in each box.";
+    return false;
+  }
+  // check that the minus sign is in the first position (only way to be to the left of all numbers) -- if not the minus sign placement is invalid
+  if (stringArray[0].charCodeAt(0) != MINUS_SIGN_CHARACTER_CODE) {
+    error.message = "Error: A minus sign must be placed at the start of a box.";
+    return false;
+  }
+  // minus sign is valid
+  return true;
+}
+
+// Input: A non-empty string that contains numbers, up to one minus sign, and up to one decimal separator
+// Outpus: A boolean that indicates if the newest decimal separator entry to the string is valid.
+// Note: Valid means there is only one decimal separator in the string, and that it is to rhe right of a minus sign if one exists.
+function validDecimalSeparatorPlacement(s, error) {
+  // make sure there is only one decimal separator in the code
+  let decimalSeparatorAmt = 0;
+  const DECIMAL_SEPARATOR_CHARACTER_CODE = 46;
+
+  for (const char of s) {
+    if (char.charCodeAt(0) == DECIMAL_SEPARATOR_CHARACTER_CODE) {
+      decimalSeparatorAmt += 1;
     }
+  }
+
+  let validDecimalSeparatorAmt = decimalSeparatorAmt <= 1;
+  if (!validDecimalSeparatorAmt) {
+    error.message =
+      "Error: Cannot place more than one decimal separator in a number";
+    return false;
+  }
+  // check that the decimal separator is not to the left of a minus sign
+  if (!validCharacterPlacement(s)) {
+    error.message =
+      "Error: Decimal separators must be to the right of a minus sign.";
+    return false;
   }
 
   return true;
 }
 
-// Input: A string with numbers, minus signs, and perhaps decimal separators. Assume the string is non-empty.
-// Outpus: A boolean that indicates if the newest decimal separator entry to the string is valid.
-// Note: Valid means there is only one decimal separator in the string.
-function validDecimalSeparator(s) {
-  // get the last value -- should be a minus sign
-  let decimalSeparator = s[s.length - 1];
+// Input: A non-empty string that contains numbers, up to one minus sign, and up to one decimal separator
+// Output: A boolean. False when a number/decimal separator is placed to the left of a minus sign. True any other time
+function validCharacterPlacement(s) {
+  // get the minus sign's position from the string
+  let minusSignIdx = s.indexOf("-");
 
-  // iterate from the last position to the first position
-  for (let idx = s.length - 2; idx >= 0; idx--) {
-    // check if the charcatcer code in each position is not equal to the value for a minus sign
-    if (s.charCodeAt(idx) == decimalSeparator.charCodeAt(0)) {
-      // return false as the position is invalid
-      return false;
-    }
-  }
+  // if there isn't a minus sign in the string then the number placement is valid
+  if (minusSignIdx == -1) return true;
+
+  if (minusSignIdx > 0) return false;
 
   return true;
+}
+
+// Input: A non empty string with one character
+// Output: True or false. True if the character is a valid input: '.', '-', or 0-9 -- false otherwise
+function validCharacter(inputCharacter) {
+  return (
+    inputCharacter.charCodeAt(0) == 45 ||
+    inputCharacter.charCodeAt(0) == 46 ||
+    (inputCharacter.charCodeAt(0) >= 48 && inputCharacter.charCodeAt(0) <= 58)
+  );
 }
 
 // Write the given string input into the error message container and make the error visible to the user
@@ -53,33 +104,56 @@ integerInputs.forEach((input) => {
     // get the current input value
     let currentValue = e.target.value;
     // get the most recently added value
-    let newInput = e.target.value.slice(currentValue.length - 1);
+    let newInputIdx = e.target.selectionStart - 1;
+    let newInput = e.target.value[newInputIdx];
+
+    // check if the new input is an invalid character
+    if (!validCharacter(newInput)) {
+      writeError("Error: Invalid character");
+      e.target.value =
+        currentValue.slice(0, newInputIdx) +
+        currentValue.slice(newInputIdx + 1);
+      e.target.selectionStart = newInputIdx;
+      return;
+    }
 
     // check if the input value is a minus sign
     if (newInput.charCodeAt(0) == 45) {
-      if (!validMinusSignPlacement(currentValue)) {
-        e.target.value = currentValue.slice(0, currentValue.length - 1);
-        writeError("Error: Minus signs can only be to the right of a number");
+      let error = { message: "" };
+      if (!validMinusSignPlacement(currentValue, error)) {
+        e.target.value =
+          currentValue.slice(0, newInputIdx) +
+          currentValue.slice(newInputIdx + 1);
+        e.target.selectionStart = newInputIdx;
+        writeError(error.message);
       }
       return;
     }
 
     // check if input value is a decimal separator
     if (newInput.charCodeAt(0) == 46) {
-      if (!validDecimalSeparator(currentValue)) {
-        e.target.value = currentValue.slice(0, currentValue.length - 1);
-        writeError(
-          "Error: There can only be one decimal separator in each box"
-        );
+      let error = { message: "" };
+      if (!validDecimalSeparatorPlacement(currentValue, error)) {
+        e.target.value =
+          currentValue.slice(0, newInputIdx) +
+          currentValue.slice(newInputIdx + 1);
+        e.target.selectionStart = newInputIdx;
+        writeError(error.message);
       }
       return;
     }
 
-    // check that the newinput is in the whitelist -- only numbers are allowed
-    if (newInput.charCodeAt(0) < 48 || newInput.charCodeAt(0) > 58) {
-      // remove the invalid value from the input node
-      e.target.value = currentValue.slice(0, currentValue.length - 1);
-      writeError("Error: Invalid character");
+    // a valid character representing a number 0-9
+    if (newInput.charCodeAt(0) >= 48 && newInput.charCodeAt(0) <= 58) {
+      if (!validCharacterPlacement(currentValue)) {
+        e.target.value =
+          currentValue.slice(0, newInputIdx) +
+          currentValue.slice(newInputIdx + 1);
+        e.target.selectionStart = newInputIdx;
+        writeError(
+          "Error: A number cannot be placed in front of a minus sign."
+        );
+      }
     }
   });
 });
